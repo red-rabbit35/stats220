@@ -1,11 +1,26 @@
-# stats220
+# Stats220
 
-This is my repo for STATS 220. 
+### This is my repo for STATS 220. 
 
-A little about me:
+*A little about me:*
 
-- I am undertaking a degree in Law and Statistics
+- I am currently in my second year undertaking a degree in **Law and Statistics**
 - I am taking STATS 220 because I am interested in data storage and processing 
 - I am interested in learning about R
 
-A meme that captures how I currently feel about my university studies is ![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTRuN28yY2I4bWc1c3Z1YzZ4ZThmZmhuNHprOWJlN3ZqYzI4MjE2OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9bXjoBk28pwnKLKoKb/giphy.gif)
+  **Hobbies of mine:**
+
+1. Reading, specfically *thriller!*
+2. Drawing
+3. Cooking
+
+**My Top 3 Favourite Youtube Chanels**
+- https://www.youtube.com/@SlushyNoobz
+- https://www.youtube.com/@CodyKo
+- https://www.youtube.com/@emmachamberlain
+
+  
+**A meme that captures how I currently feel about my university studies is:**
+
+
+![](https://media.giphy.com/media/l0MYu38R0PPhIXe36/giphy.gif?cid=790b7611lr3o5otuqdpsnyiujq4vil1eyunyy8c4h9ac2dj4&ep=v1_gifs_search&rid=giphy.gif&ct=g)
