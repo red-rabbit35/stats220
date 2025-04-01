@@ -63,9 +63,9 @@ ggplot(data = latest_data)+
            #coloring the bars for the aesthetic 
 num_observation <- latest_data$reading_minutes%>%
   length()
-max_reading <- latest_data$book_format%>%
-  max()
-
+max_reading <- table(latest_data$book_format)
+max_format <- names(which.max(max_reading))
+#Using a new function, which.max rather than max because my variables are categorical
 paste("From the two book formats observed  at Auckland Domain,", max_reading, "was the most popular book format out of the", num_observation, "people that observed reading over a 7 day period." )
 ```
 
@@ -89,9 +89,12 @@ latest_data %>%
   #putting the genre's on an angle as there are too many and they would cross over, making the graph look tidy
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-popular_genre <- max(latest_data$book_genre)
+genre_counts <- table(latest_data$book_genre)
+most_popular_genre <- names(which.max(genre_counts))  
+#Using a new function, which.max rather than max because my variables are categorical
 
-least_genre <- min(latest_data$book_genre)
+min_genre_counts <- table(latest_data$book_genre)
+least_genre <- names(which.min(min_genre_counts))
 
 num_observation <- length(latest_data$book_genre)
 
