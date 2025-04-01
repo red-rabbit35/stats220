@@ -1,0 +1,114 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css,  echo = FALSE}
+body {
+  background-color: #EADDCA;/*Here I am changing the color of the background */
+  color: #6E260E;/* Changing the color of the text to match the background */
+  font-family:  "Times New Roman", serif;/* adding a back-up font in case the first fails */
+
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  color: #954535; /* Giving the headers a darker color */
+  font-family: "Comic Sans MS", sans-serif;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #954535;
+  font-family: "Montserrat", serif;
+}
+```
+
+## How and what are people reading at Auckalnd Domain ?
+
+This dynamic report will explore how often certain book format's and book genre's are observed at Auckland Domain along with the minutes the observed people spend reading. From observations in Auckland Domain, I will firstly be exploring whether more people reading physical books or digital ones (e-books, audio books). Along with this, this report aims to look at genre popularity and how this correlates with book formats. 
+
+
+
+```{r}
+#Loading necessary package 
+library(tidyverse)
+csv_file <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRD6ZqKSi9HFXhYukJSGyTxfeG_Vy9pfRj20rcEejfZdXOqnPvwxMoFU0JT6J0rimVB-T422En-xwHG/pub?output=csv"
+#Using the read.csv() function to read my data then naming the data for easier access to contents
+logged_data <- read.csv(csv_file) %>%
+# Using the rename() function to change the variable names to shorter but identifiable names 
+  rename(time_stamp = 1,
+         reading_minutes = 2, 
+         book_format = 3, 
+         book_genre = 4)
+latest_data <- logged_data
+```
+
+## Book Format Popularity
+This plot explores how often Physical books and Digital Books were seen in Auckland Domain. 
+
+```{r}
+ggplot(data = latest_data)+
+  geom_bar(aes(x = book_format), fill = "#6F4E37")+
+  labs(title = "Book Format Popularity",
+       x ="Book Format", 
+       y = "Number of Observations",)
+           #coloring the bars for the aesthetic 
+num_observation <- latest_data$reading_minutes%>%
+  length()
+max_reading <- table(latest_data$book_format)
+max_format <- names(which.max(max_reading))
+
+
+paste("From the two book formats observed  at Auckland Domain,", max_format, "was the most popular book format out of the", num_observation, "people that observed reading over a 7 day period." )
+```
+
+
+## Genre Popularity?
+This graph will explore how popular each book genre was along with what proportion of each genre was a Digital book or a Physical book.
+
+```{r fig.width = 12, fig.height = 6}
+#My second bar graph
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = book_genre, fill = book_format))+
+  #Changing the color of my bar graphs to better visualize the two categories and for aesthetic purposes
+  scale_fill_manual(values = c("#5C4033", "#9A2A2A"))+
+  #Adding subtitle and title to communicate what my graph aims to show
+  labs(title = "Book format and genre?",
+       subtitle = "Comparing book format and book genres read at Auckland Domain",
+       #naming the y and x axis to also help with the understanding of my graph
+       x = "Book Genre",
+       y = "Number of Observations")+
+  #putting the genre's on an angle as there are too many and they would cross over, making the graph look tidy
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+genre_counts <- table(latest_data$book_genre)
+most_popular_genre <- names(which.max(genre_counts))  
+#Using a new function, which.max rather than max because my variables are categorical
+
+min_genre_counts <- table(latest_data$book_genre)
+least_genre <- names(which.min(min_genre_counts))
+
+num_observation <- length(latest_data$book_genre)
+
+paste("From the people observed at Auckland Domain, the most popular genre was", most_popular_genre, ". Whilst the least popular genre was",least_genre, "out of the", num_observation, "people that observed reading over a 7 day period.")
+```
+
+
+## Average time spent Reading at Auckland Domain
+
+```{r}
+
+avg_time <- round(mean(latest_data$reading_minutes),1)
+
+paste("The average time the observed readers in Auckalnd Domain spend reading is",avg_time ,"minutes." )
+
+```
